@@ -9,6 +9,9 @@ import mdx from '@astrojs/mdx';
 import partytown from '@astrojs/partytown';
 import icon from 'astro-icon';
 import compress from '@playform/compress';
+// Vue
+import vue from "@astro/vue";
+import vuetify from 'vite-plugin-vuetify';
 
 import astrowind from './vendor/integration';
 
@@ -33,6 +36,7 @@ export default defineConfig({
     }),
     sitemap(),
     mdx(),
+    vue(),
     icon({
       include: {
         tabler: ['*'],
@@ -90,5 +94,13 @@ export default defineConfig({
         '~': path.resolve(__dirname, './src'),
       },
     },
+    ssr: {
+      noExternal: ['vuetify'],
+    },
+    plugins: [
+        vuetify({
+            autoImport: true,
+        }),
+    ],
   },
 });
